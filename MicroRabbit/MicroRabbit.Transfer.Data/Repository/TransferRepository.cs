@@ -4,6 +4,7 @@ using MicroRabbit.Transfer.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MicroRabbit.Transfer.Data.Repository
 {
@@ -13,6 +14,13 @@ namespace MicroRabbit.Transfer.Data.Repository
         public TransferRepository(TransferDbContext context)
         {
             _context = context;
+        }
+
+        public Task Add(TransferLog transferLog)
+        {
+            _context.TransferLogs.Add(transferLog);
+            _context.SaveChanges();
+            return Task.CompletedTask;
         }
 
         public IEnumerable<TransferLog> GetTransferLogs()

@@ -33,6 +33,9 @@ namespace MicroRabbit.Infra.IoC
                 return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
 
+            //Subscriptions
+            services.AddTransient<TransferEventHandler>();
+
             //Domain Events
             services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
 
